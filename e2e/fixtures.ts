@@ -15,7 +15,9 @@ export const test = base.extend<{
   extensionId: string;
 }>({
   extensionContext: [
-    async (_fixtures, use) => {
+    // Playwright requires object destructuring for fixture callbacks.
+    // oxlint-disable-next-line eslint/no-empty-pattern
+    async ({}, use) => {
       const context = await chromium.launchPersistentContext('', {
         channel: 'chromium',
         headless: false,
