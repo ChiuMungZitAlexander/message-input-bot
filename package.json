@@ -24,6 +24,9 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
     "dev:test": "serve test -p 8787",
+    "pretest:e2e": "wxt build && node e2e/ensure-browsers.mjs",
+    "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=./.playwright-browsers playwright test",
+    "test:e2e:ui": "PLAYWRIGHT_BROWSERS_PATH=./.playwright-browsers playwright test --ui",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
@@ -34,6 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
+    "@playwright/test": "^1.61.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "oxfmt": "^0.54.0",
