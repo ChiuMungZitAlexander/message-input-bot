@@ -5,5 +5,6 @@ export default defineConfig({
   manifest: {
     name: 'MessageInputBot',
     description: 'Message input browser extension',
+    permissions: ['storage', 'tabs', 'scripting'],
   },
 });
