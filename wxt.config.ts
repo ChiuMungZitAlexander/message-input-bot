@@ -3,7 +3,7 @@ import { defineConfig } from 'wxt';
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   manifest: {
-    name: 'Message Input Bot',
+    name: 'MessageInputBot',
     description: 'Message input browser extension',
   },
 });
