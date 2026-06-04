@@ -9,24 +9,42 @@ import {
 const CONTENT_SCRIPT_ID = 'message-input-bot';
 const CONTENT_SCRIPT_PATH = 'content-scripts/content.js';
 
-async function syncContentScripts(domains: string[]): Promise<void> {
-  try {
-    await browser.scripting.unregisterContentScripts({ ids: [CONTENT_SCRIPT_ID] });
-  } catch {
-    // Not registered yet.
+let syncQueue: Promise<void> = Promise.resolve();
+
+async function applyContentScripts(domains: string[]): Promise<void> {
+  const registered = await browser.scripting.getRegisteredContentScripts({
+    ids: [CONTENT_SCRIPT_ID],
+  });
+
+  if (domains.length === 0) {
+    if (registered.length > 0) {
+      await browser.scripting.unregisterContentScripts({ ids: [CONTENT_SCRIPT_ID] });
+    }
+    return;
   }
 
-  if (domains.length === 0) return;
+  const script = {
+    id: CONTENT_SCRIPT_ID,
+    matches: domainsToMatchPatterns(domains),
+    js: [CONTENT_SCRIPT_PATH],
+    runAt: 'document_idle' as const,
+    persistAcrossSessions: true,
+  };
 
-  await browser.scripting.registerContentScripts([
-    {
-      id: CONTENT_SCRIPT_ID,
-      matches: domainsToMatchPatterns(domains),
-      js: [CONTENT_SCRIPT_PATH],
-      runAt: 'document_idle',
-      persistAcrossSessions: true,
-    },
-  ]);
+  if (registered.length > 0) {
+    await browser.scripting.updateContentScripts([script]);
+  } else {
+    await browser.scripting.registerContentScripts([script]);
+  }
+}
+
+function syncContentScripts(domains: string[]): Promise<void> {
+  syncQueue = syncQueue
+    .then(() => applyContentScripts(domains))
+    .catch((error) => {
+      console.error('[MessageInputBot] Failed to sync content scripts:', error);
+    });
+  return syncQueue;
 }
 
 async function seedDefaultWhitelist(): Promise<void> {
