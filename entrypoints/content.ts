@@ -1,4 +1,3 @@
-import { ALLOWED_SITES } from '@/config/allowed-sites';
 import type { EditableElement } from '@/lib/editable';
 import { getFocusedEditable, isEditableElement } from '@/lib/editable';
 import { createPanel, type PanelConfig } from '@/lib/panel';
@@ -6,7 +5,8 @@ import { runRepeater } from '@/lib/repeater';
 import { createTriggerButton } from '@/lib/trigger-button';
 
 export default defineContentScript({
-  matches: ALLOWED_SITES,
+  registration: 'runtime',
+  matches: [],
   main() {
     const trigger = createTriggerButton();
     const panel = createPanel();
