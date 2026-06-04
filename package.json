@@ -15,10 +15,11 @@
     "zip:edge": "wxt zip -b edge",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
-    "dev:test": "python3 -m http.server 8787 --directory test",
+    "dev:test": "serve test -p 8787",
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
+    "serve": "^14.2.6",
     "typescript": "^5.9.3",
     "wxt": "^0.20.26"
   }
