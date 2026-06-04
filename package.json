@@ -15,6 +15,7 @@
     "zip:edge": "wxt zip -b edge",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
+    "dev:test": "python3 -m http.server 8787 --directory test",
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
