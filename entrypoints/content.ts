@@ -86,6 +86,7 @@ export default defineContentScript({
         text: config.text,
         count: config.count,
         intervalMs: Math.round(config.intervalSeconds * 1000),
+        intervalJitter: config.intervalJitter,
         target,
         signal,
         onProgress(done, total) {

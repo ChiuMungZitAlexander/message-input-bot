@@ -5,6 +5,7 @@ export interface PanelConfig {
   text: string;
   count: number;
   intervalSeconds: number;
+  intervalJitter: boolean;
 }
 
 export interface PanelController {
@@ -134,6 +135,71 @@ const PANEL_STYLES = `
   .complete {
     color: #27ae60;
   }
+
+  label.jitter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  label.jitter span.jitter-label {
+    display: inline;
+    margin-bottom: 0;
+    flex: 1;
+    color: #555;
+    font-size: 12px;
+  }
+
+  label.jitter input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+  }
+
+  .help-wrap {
+    position: relative;
+    flex: none;
+  }
+
+  .help-btn {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 1px solid #bbb;
+    border-radius: 50%;
+    background: #f5f5f5;
+    color: #666;
+    font-size: 11px;
+    line-height: 1;
+    cursor: help;
+  }
+
+  .help-btn:disabled {
+    cursor: not-allowed;
+  }
+
+  .help-tooltip {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 6px);
+    width: 200px;
+    padding: 6px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    color: #444;
+    font-size: 11px;
+    line-height: 1.4;
+    z-index: 1;
+  }
+
+  .help-wrap:hover .help-tooltip,
+  .help-wrap:focus-within .help-tooltip {
+    display: block;
+  }
 `;
 
 export function createPanel(): PanelController {
@@ -165,6 +231,14 @@ export function createPanel(): PanelController {
         <input type="number" data-field="interval" min="0.1" step="0.1" value="2" />
       </label>
     </div>
+    <label class="jitter">
+      <input type="checkbox" data-field="jitter" />
+      <span class="jitter-label">随机抖动</span>
+      <span class="help-wrap">
+        <button type="button" class="help-btn" aria-label="随机抖动说明">?</button>
+        <span class="help-tooltip">开启后，每次发送间隔会在设定值的 ±10% 范围内随机浮动，避免固定节奏被检测。</span>
+      </span>
+    </label>
     <div class="error" data-role="error"></div>
     <div class="progress" data-role="progress"></div>
     <div class="actions">
@@ -178,6 +252,8 @@ export function createPanel(): PanelController {
   const textInput = panel.querySelector<HTMLInputElement>('[data-field="text"]')!;
   const countInput = panel.querySelector<HTMLInputElement>('[data-field="count"]')!;
   const intervalInput = panel.querySelector<HTMLInputElement>('[data-field="interval"]')!;
+  const jitterCheckbox = panel.querySelector<HTMLInputElement>('[data-field="jitter"]')!;
+  const helpBtn = panel.querySelector<HTMLButtonElement>('.help-btn')!;
   const errorEl = panel.querySelector<HTMLElement>('[data-role="error"]')!;
   const progressEl = panel.querySelector<HTMLElement>('[data-role="progress"]')!;
   const cancelBtn = panel.querySelector<HTMLButtonElement>('[data-action="cancel"]')!;
@@ -193,6 +269,8 @@ export function createPanel(): PanelController {
     textInput.disabled = disabled;
     countInput.disabled = disabled;
     intervalInput.disabled = disabled;
+    jitterCheckbox.disabled = disabled;
+    helpBtn.disabled = disabled;
     cancelBtn.disabled = disabled;
     startBtn.hidden = disabled;
     stopBtn.hidden = !disabled;
@@ -217,7 +295,7 @@ export function createPanel(): PanelController {
     }
 
     errorEl.textContent = '';
-    return { text, count, intervalSeconds };
+    return { text, count, intervalSeconds, intervalJitter: jitterCheckbox.checked };
   }
 
   function open(anchor: OverlayPosition, target: EditableElement): void {
