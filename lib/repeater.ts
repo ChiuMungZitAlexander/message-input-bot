@@ -34,8 +34,18 @@ function sleep(ms: number, signal: AbortSignal): Promise<void> {
   });
 }
 
-export async function runRepeater(config: RepeatConfig): Promise<'completed' | 'aborted'> {
-  const { text, count, intervalMs, intervalJitter, target, onProgress, signal } = config;
+export async function runRepeater(
+  config: RepeatConfig,
+): Promise<'completed' | 'aborted'> {
+  const {
+    text,
+    count,
+    intervalMs,
+    intervalJitter,
+    target,
+    onProgress,
+    signal,
+  } = config;
 
   for (let i = 0; i < count; i++) {
     if (signal.aborted) return 'aborted';
@@ -45,7 +55,9 @@ export async function runRepeater(config: RepeatConfig): Promise<'completed' | '
 
     if (i < count - 1) {
       try {
-        const waitMs = intervalJitter ? jitteredIntervalMs(intervalMs) : intervalMs;
+        const waitMs = intervalJitter
+          ? jitteredIntervalMs(intervalMs)
+          : intervalMs;
         await sleep(waitMs, signal);
       } catch {
         return 'aborted';

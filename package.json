@@ -1,17 +1,17 @@
 {
   "name": "message-input-bot",
-  "description": "Message input browser extension",
-  "private": true,
   "version": "0.1.0",
-  "type": "module",
+  "private": true,
+  "description": "Message input browser extension",
+  "homepage": "https://github.com/ChiuMungZitAlexander/message-input-bot",
+  "bugs": {
+    "url": "https://github.com/ChiuMungZitAlexander/message-input-bot/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ChiuMungZitAlexander/message-input-bot.git"
   },
-  "bugs": {
-    "url": "https://github.com/ChiuMungZitAlexander/message-input-bot/issues"
-  },
-  "homepage": "https://github.com/ChiuMungZitAlexander/message-input-bot",
+  "type": "module",
   "scripts": {
     "dev": "wxt",
     "dev:edge": "wxt -b edge",
@@ -24,11 +24,26 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
     "dev:test": "serve test -p 8787",
-    "postinstall": "wxt prepare"
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "postinstall": "wxt prepare",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0",
     "serve": "^14.2.6",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "wxt": "^0.20.26"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs,json,jsonc,html,css,md}": "oxfmt --write",
+    "*.{js,ts,mjs,cjs}": "oxlint --fix"
   }
 }

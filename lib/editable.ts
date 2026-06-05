@@ -35,7 +35,9 @@ export function isEditableElement(el: Element | null): el is EditableElement {
   return isContentEditable(el);
 }
 
-function findEditableInRoot(root: Document | ShadowRoot): EditableElement | null {
+function findEditableInRoot(
+  root: Document | ShadowRoot,
+): EditableElement | null {
   const active = root.activeElement;
   if (!active) return null;
 

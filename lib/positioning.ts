@@ -25,9 +25,7 @@ export function getTriggerButtonPosition(
   };
 }
 
-export function getPanelPosition(
-  anchor: OverlayPosition,
-): OverlayPosition {
+export function getPanelPosition(anchor: OverlayPosition): OverlayPosition {
   const panelWidth = 260;
   const panelHeight = 220;
   let left = anchor.left - panelWidth + BUTTON_SIZE;

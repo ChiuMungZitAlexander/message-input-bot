@@ -9,14 +9,16 @@ const BLOCKED_PROTOCOLS = new Set([
   'file:',
 ]);
 
-const DOMAIN_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const DOMAIN_PATTERN =
+  /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const IPV4_PATTERN = /^(?:\d{1,3}\.){3}\d{1,3}$/;
 
 export function extractHostname(url: string): string | null {
   try {
     const parsed = new URL(url);
     if (BLOCKED_PROTOCOLS.has(parsed.protocol)) return null;
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:')
+      return null;
     const hostname = parsed.hostname;
     if (!hostname) return null;
     return hostname;

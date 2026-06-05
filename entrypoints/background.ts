@@ -18,7 +18,9 @@ async function applyContentScripts(domains: string[]): Promise<void> {
 
   if (domains.length === 0) {
     if (registered.length > 0) {
-      await browser.scripting.unregisterContentScripts({ ids: [CONTENT_SCRIPT_ID] });
+      await browser.scripting.unregisterContentScripts({
+        ids: [CONTENT_SCRIPT_ID],
+      });
     }
     return;
   }
@@ -50,7 +52,9 @@ function syncContentScripts(domains: string[]): Promise<void> {
 async function seedDefaultWhitelist(): Promise<void> {
   const result = await browser.storage.local.get(WHITELIST_STORAGE_KEY);
   if (result[WHITELIST_STORAGE_KEY] != null) return;
-  await browser.storage.local.set({ [WHITELIST_STORAGE_KEY]: DEFAULT_WHITELIST });
+  await browser.storage.local.set({
+    [WHITELIST_STORAGE_KEY]: DEFAULT_WHITELIST,
+  });
 }
 
 async function initWhitelist(): Promise<void> {

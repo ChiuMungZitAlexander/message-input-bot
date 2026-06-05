@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [".output/**", ".wxt/**", "node_modules/**"],
+  "printWidth": 80,
+  "singleQuote": true,
+  "singleAttributePerLine": true,
+  "sortImports": {
+    "groups": [
+      ["builtin", "external"],
+      ["internal"],
+      ["parent", "sibling", "index"],
+      "style",
+      "unknown"
+    ]
+  }
+}

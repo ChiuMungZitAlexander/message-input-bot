@@ -65,7 +65,10 @@ function clearContentEditable(el: HTMLElement): void {
   }
   document.execCommand('delete', false);
   el.dispatchEvent(
-    new InputEvent('input', { bubbles: true, inputType: 'deleteContentBackward' }),
+    new InputEvent('input', {
+      bubbles: true,
+      inputType: 'deleteContentBackward',
+    }),
   );
 }
 
@@ -74,7 +77,11 @@ function insertContentEditable(el: HTMLElement, text: string): void {
   if (!document.execCommand('insertText', false, text)) {
     el.textContent = text;
     el.dispatchEvent(
-      new InputEvent('input', { bubbles: true, inputType: 'insertText', data: text }),
+      new InputEvent('input', {
+        bubbles: true,
+        inputType: 'insertText',
+        data: text,
+      }),
     );
   }
 }

@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Message Input Bot — Test Fixtures</title>
     <style>
       * {
@@ -100,12 +103,16 @@
   <body>
     <h1>Message Input Bot — 本地测试页</h1>
     <p class="hint">
-      Focus 任意输入框，应出现右上角小按钮。配置重复内容后观察输入与 Enter 行为。
+      Focus 任意输入框，应出现右上角小按钮。配置重复内容后观察输入与 Enter
+      行为。
     </p>
 
     <section>
       <h2>&lt;input type="text"&gt;</h2>
-      <input type="text" placeholder="在此输入..." />
+      <input
+        type="text"
+        placeholder="在此输入..."
+      />
     </section>
 
     <section>
@@ -115,13 +122,19 @@
 
     <section>
       <h2>&lt;div contenteditable="true"&gt;</h2>
-      <div contenteditable="true" data-placeholder="在此输入..."></div>
+      <div
+        contenteditable="true"
+        data-placeholder="在此输入..."
+      ></div>
     </section>
 
     <section>
       <h2>模拟聊天框（Enter 提交消息）</h2>
       <div class="chat-box">
-        <div id="chat-messages" class="chat-messages"></div>
+        <div
+          id="chat-messages"
+          class="chat-messages"
+        ></div>
         <div class="chat-input-row">
           <div
             id="chat-input"

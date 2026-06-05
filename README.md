@@ -10,6 +10,7 @@
 - **跨浏览器** — 基于 [WXT](https://wxt.dev) 构建，支持 Chrome、Edge 和 Firefox
 
 ## 使用场景
+
 - ~~聊天室在线battle~~
 - ~~直播间疯狂抠666~~
 
@@ -22,10 +23,10 @@ bun run build
 
 在浏览器中加载未打包的扩展：
 
-| 浏览器 | 产物目录 |
-|--------|----------|
-| Chrome | `.output/chrome-mv3` |
-| Edge   | `.output/edge-mv3` |
+| 浏览器  | 产物目录              |
+| ------- | --------------------- |
+| Chrome  | `.output/chrome-mv3`  |
+| Edge    | `.output/edge-mv3`    |
 | Firefox | `.output/firefox-mv2` |
 
 ## 使用

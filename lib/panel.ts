@@ -12,7 +12,9 @@ export interface PanelController {
   open(anchor: OverlayPosition, target: EditableElement): void;
   close(): void;
   isOpen(): boolean;
-  setOnStart(handler: (config: PanelConfig, target: EditableElement) => void): void;
+  setOnStart(
+    handler: (config: PanelConfig, target: EditableElement) => void,
+  ): void;
   setOnStop(handler: () => void): void;
   setRunning(running: boolean): void;
   setProgress(done: number, total: number): void;
@@ -249,19 +251,37 @@ export function createPanel(): PanelController {
   `;
   shadow.appendChild(panel);
 
-  const textInput = panel.querySelector<HTMLInputElement>('[data-field="text"]')!;
-  const countInput = panel.querySelector<HTMLInputElement>('[data-field="count"]')!;
-  const intervalInput = panel.querySelector<HTMLInputElement>('[data-field="interval"]')!;
-  const jitterCheckbox = panel.querySelector<HTMLInputElement>('[data-field="jitter"]')!;
+  const textInput = panel.querySelector<HTMLInputElement>(
+    '[data-field="text"]',
+  )!;
+  const countInput = panel.querySelector<HTMLInputElement>(
+    '[data-field="count"]',
+  )!;
+  const intervalInput = panel.querySelector<HTMLInputElement>(
+    '[data-field="interval"]',
+  )!;
+  const jitterCheckbox = panel.querySelector<HTMLInputElement>(
+    '[data-field="jitter"]',
+  )!;
   const helpBtn = panel.querySelector<HTMLButtonElement>('.help-btn')!;
   const errorEl = panel.querySelector<HTMLElement>('[data-role="error"]')!;
-  const progressEl = panel.querySelector<HTMLElement>('[data-role="progress"]')!;
-  const cancelBtn = panel.querySelector<HTMLButtonElement>('[data-action="cancel"]')!;
-  const startBtn = panel.querySelector<HTMLButtonElement>('[data-action="start"]')!;
-  const stopBtn = panel.querySelector<HTMLButtonElement>('[data-action="stop"]')!;
+  const progressEl = panel.querySelector<HTMLElement>(
+    '[data-role="progress"]',
+  )!;
+  const cancelBtn = panel.querySelector<HTMLButtonElement>(
+    '[data-action="cancel"]',
+  )!;
+  const startBtn = panel.querySelector<HTMLButtonElement>(
+    '[data-action="start"]',
+  )!;
+  const stopBtn = panel.querySelector<HTMLButtonElement>(
+    '[data-action="stop"]',
+  )!;
 
   let currentTarget: EditableElement | null = null;
-  let onStartHandler: ((config: PanelConfig, target: EditableElement) => void) | null = null;
+  let onStartHandler:
+    | ((config: PanelConfig, target: EditableElement) => void)
+    | null = null;
   let onStopHandler: (() => void) | null = null;
   let running = false;
 
@@ -295,7 +315,12 @@ export function createPanel(): PanelController {
     }
 
     errorEl.textContent = '';
-    return { text, count, intervalSeconds, intervalJitter: jitterCheckbox.checked };
+    return {
+      text,
+      count,
+      intervalSeconds,
+      intervalJitter: jitterCheckbox.checked,
+    };
   }
 
   function open(anchor: OverlayPosition, target: EditableElement): void {

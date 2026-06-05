@@ -19,7 +19,8 @@ export default defineContentScript({
     function isFocusInsideUi(target: EventTarget | null): boolean {
       if (!(target instanceof Node)) return false;
       for (const host of uiHosts) {
-        if (host.contains(target) || host.shadowRoot?.contains(target)) return true;
+        if (host.contains(target) || host.shadowRoot?.contains(target))
+          return true;
       }
       return false;
     }

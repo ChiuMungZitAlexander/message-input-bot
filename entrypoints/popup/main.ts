@@ -1,5 +1,4 @@
 import './style.css';
-import packageJson from '../../package.json';
 import { extractHostname, normalizeDomain } from '@/lib/whitelist';
 import {
   addDomain,
@@ -7,6 +6,8 @@ import {
   onWhitelistChanged,
   removeDomain,
 } from '@/lib/whitelist-storage';
+
+import packageJson from '../../package.json';
 
 const PLUGIN_NAME = 'MessageInputBot';
 const REPO_URL =
@@ -49,7 +50,7 @@ function isCurrentWhitelisted(): boolean {
 
 function render(): void {
   const currentLabel = state.canAddCurrent
-    ? state.currentHostname ?? '未知'
+    ? (state.currentHostname ?? '未知')
     : '此页面无法添加';
 
   const currentAction = state.canAddCurrent
@@ -104,11 +105,7 @@ function render(): void {
         <ul class="domain-list">${listItems}</ul>
       </section>
 
-      ${
-        state.notice
-          ? `<p class="notice">${escapeHtml(state.notice)}</p>`
-          : ''
-      }
+      ${state.notice ? `<p class="notice">${escapeHtml(state.notice)}</p>` : ''}
       </div>
 
       <footer class="footer">
