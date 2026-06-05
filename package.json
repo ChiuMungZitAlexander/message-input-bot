@@ -2,8 +2,16 @@
   "name": "message-input-bot",
   "description": "Message input browser extension",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChiuMungZitAlexander/message-input-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChiuMungZitAlexander/message-input-bot/issues"
+  },
+  "homepage": "https://github.com/ChiuMungZitAlexander/message-input-bot",
   "scripts": {
     "dev": "wxt",
     "dev:edge": "wxt -b edge",

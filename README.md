@@ -1,0 +1,101 @@
+# MessageInputBot
+
+A browser extension that automatically repeats message input in web page text fields.
+
+## Features
+
+- **Whitelist control** — Enable the extension only on sites you trust
+- **Trigger button** — Appears when you focus an editable field (`input`, `textarea`, or `contenteditable`)
+- **Repeat input** — Configure text, count, interval, and optional random jitter (±10%)
+- **Cross-browser** — Built with [WXT](https://wxt.dev); supports Chrome, Edge, and Firefox
+
+## Installation
+
+```bash
+bun install
+bun run build
+```
+
+Load the unpacked extension in your browser:
+
+| Browser | Output directory |
+|---------|------------------|
+| Chrome  | `.output/chrome-mv3` |
+| Edge    | `.output/edge-mv3` |
+| Firefox | `.output/firefox-mv2` |
+
+## Usage
+
+1. Click the extension icon and add the current site (or a domain manually) to the whitelist
+2. Refresh the page
+3. Focus a text input on the page
+4. Click the trigger button that appears next to the field
+5. Configure repeat settings and click **Start**
+
+## Development
+
+```bash
+bun run dev          # Chrome dev mode with hot reload
+bun run dev:edge     # Edge
+bun run dev:firefox  # Firefox
+bun run build        # Production build
+bun run zip          # Package for distribution
+bun run dev:test     # Local test page at http://localhost:8787
+bun run compile      # TypeScript type check
+```
+
+## Feedback
+
+Found a bug or have a feature request? [Open an issue on GitHub](https://github.com/ChiuMungZitAlexander/message-input-bot/issues).
+
+---
+
+# MessageInputBot
+
+在网页输入框中自动重复发送消息的浏览器扩展。
+
+## 功能
+
+- **白名单控制** — 仅在您信任的网站启用扩展
+- **触发按钮** — 聚焦可编辑字段（`input`、`textarea` 或 `contenteditable`）时显示
+- **重复输入** — 可配置内容、次数、间隔，以及可选的随机抖动（±10%）
+- **跨浏览器** — 基于 [WXT](https://wxt.dev) 构建，支持 Chrome、Edge 和 Firefox
+
+## 安装
+
+```bash
+bun install
+bun run build
+```
+
+在浏览器中加载未打包的扩展：
+
+| 浏览器 | 产物目录 |
+|--------|----------|
+| Chrome | `.output/chrome-mv3` |
+| Edge   | `.output/edge-mv3` |
+| Firefox | `.output/firefox-mv2` |
+
+## 使用
+
+1. 点击扩展图标，将当前网站（或手动输入域名）加入白名单
+2. 刷新页面
+3. 聚焦页面上的文本输入框
+4. 点击输入框旁出现的触发按钮
+5. 配置重复参数后点击「开始」
+
+## 开发
+
+```bash
+bun run dev          # Chrome 开发模式，支持热更新
+bun run dev:edge     # Edge
+bun run dev:firefox  # Firefox
+bun run build        # 生产构建
+bun run zip          # 打包发布
+bun run dev:test     # 本地测试页 http://localhost:8787
+bun run compile      # TypeScript 类型检查
+```
+
+## 反馈
+
+发现 Bug 或有功能建议？[在 GitHub 提交 Issue](https://github.com/ChiuMungZitAlexander/message-input-bot/issues)。
